@@ -1,0 +1,9 @@
+.chart__box{
+    width:100%;
+    height:350px;
+    background-color:
+    rgba(208, 213, 241, 0.15);
+    font-size:.2rem;
+    border-radius:10px;
+    padding:1.5rem;
+}

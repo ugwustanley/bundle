@@ -1,0 +1,34 @@
+.dash{
+    display:grid;
+    grid-template-columns:1fr 4fr;
+    overflow-y:hidden;
+}
+.dash__details{
+    overflow-y:scroll;
+    width:100%;
+    height:100vh;
+    padding:1rem 3rem;
+}
+.dash-nav{
+    display:flex;
+    justify-content:space-between;
+}
+
+.dash-nav p{
+    font-weight:600;
+    cursor:pointer;
+    padding-bottom:5px;
+}
+.dash-nav h2{
+   font-size:36px;
+   font-weight:500;
+}
+
+.dash-nav__items{
+    display:flex;
+    align-items:center;
+}
+
+.dash-nav__notify, .dash-nav__user{
+    margin-left:1rem;
+}
