@@ -67,8 +67,14 @@
      
 }
 
-@media (max-width:700px){
+@media (max-width:800px){
     .footer{
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr !important;
+    }
+    .footer .footer__contact{
+        grid-column: 1/2;
+    }
+    .footer__contact, .footer__products, .footer__company, .footer__legal{
+        margin-top:2rem;
     }
 }

@@ -105,7 +105,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="connect__text">
+          <div className="why-us__text">
             <h3>Why choose us?</h3>
             <p>
               "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
