@@ -8,7 +8,7 @@ export default function Login() {
   return (
     <div className="auth">
       <div className="auth__image-container">
-        <h3>Sign In</h3>
+        <h3>Sign Up</h3>
         <div className="auth__image">
           <Image src={AuthImage} alt="auth" width={400} height={400} />
         </div>
@@ -18,11 +18,17 @@ export default function Login() {
         <div className="auth__image">
           <Image src={Logo2} alt="bundle logo" width={60} height={60} />
         </div>
-        <h3>Welcome back!</h3>
-        <p>It’s good to have you back!</p>
+        <h3>Welcome to Bundle!</h3>
+        <p>We are very excited you are joining us!</p>
 
         <form className="auth__form">
           <input
+            type="text"
+            placeholder="Full Name"
+            name="name"
+            className="auth__input"
+          />
+           <input
             type="email"
             placeholder="Email Address"
             name="email"
@@ -33,7 +39,12 @@ export default function Login() {
             placeholder="Enter Password"
             className="auth__input"
           />
-          <button className="auth__button auth__button--login">Sign In</button>
+          <input
+            type="password"
+            placeholder="Verify Password"
+            className="auth__input"
+          />
+          <button className="auth__button auth__button--login">Sign Up</button>
         </form>
 
         <div className="auth__line"></div>
@@ -43,13 +54,13 @@ export default function Login() {
           <div className="google__icon">
             <Image src={Google} alt="google icon" width={25} height={25} />{" "}
           </div>
-          <p>Sign in with Google</p>
+          <p>Sign up with Google</p>
         </button>
 
         <h6>
-          Don’t have an account?{" "}
-          <Link href="signup">
-            <b>Sign up</b>
+          Already have an account?{" "}
+          <Link href="login">
+            <b>Sign in</b>
           </Link>
         </h6>
       </div>

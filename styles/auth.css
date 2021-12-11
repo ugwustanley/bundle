@@ -2,6 +2,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   min-height: 100vh;
+  height:auto;
   font-family: "Poppins", sans-serif;
 }
 .auth__image-container {
@@ -22,6 +23,7 @@
   text-align: center;
   display: grid;
   place-content: center;
+  padding-top:2rem;
 }
 .auth__details h3 {
   font-size: 36px;
@@ -46,6 +48,7 @@
 }
 .auth__details h6 b {
   color: var(--blue);
+  cursor:pointer;
 }
 .auth__details input {
   width: 100%;
@@ -72,6 +75,7 @@
   border-radius: 8px;
   border: 2px solid var(--blue);
   cursor: pointer;
+  
 }
 .auth__line {
   background: #e5e5e5;
@@ -93,6 +97,7 @@
 .auth__button--login {
   background: var(--blue);
   color: #fff;
+  margin:auto;
   margin-top: 30px;
 }
 
@@ -102,6 +107,7 @@
   display: grid;
   place-content: center !important;
   height: 50px;
+  margin:auto;
 }
 .auth__button--google p {
   margin-top: 0;
@@ -109,7 +115,7 @@
   font-weight: 600;
   margin-left: 1rem;
 }
-@media (max-width: 768px) {
+@media (max-width: 1100px) {
   .auth {
     grid-template-columns: 1fr;
   }
