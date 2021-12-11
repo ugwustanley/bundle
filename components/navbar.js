@@ -29,7 +29,7 @@ export default function Navbar({ showNav, setShowNav }) {
               </Link>
             </li>
             <li className="nav__link nav__link--sign-up">
-              <Link href="./login">
+              <Link href="./signup">
                 <button>Sign up</button>
               </Link>
             </li>
@@ -82,7 +82,7 @@ export default function Navbar({ showNav, setShowNav }) {
             </Link>
           </li>
           <li className="mobile-nav__link mobile-nav__link--sign-up">
-            <Link href="./login">
+            <Link href="./signup">
               <button>Sign up</button>
             </Link>
           </li>
