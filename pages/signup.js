@@ -15,9 +15,11 @@ export default function Login() {
       </div>
 
       <div className="auth__details">
-        <div className="auth__image">
-          <Image src={Logo2} alt="bundle logo" width={60} height={60} />
-        </div>
+        <Link href="/">
+          <div className="auth__image">
+            <Image src={Logo2} alt="bundle logo" width={60} height={60} />
+          </div>
+        </Link>
         <h3>Welcome to Bundle!</h3>
         <p>We are very excited you are joining us!</p>
 
@@ -28,7 +30,7 @@ export default function Login() {
             name="name"
             className="auth__input"
           />
-           <input
+          <input
             type="email"
             placeholder="Email Address"
             name="email"

@@ -9,9 +9,11 @@ export default function Login() {
     <div className="auth">
       <div className="auth__image-container">
         <h3>Sign In</h3>
-        <div className="auth__image">
-          <Image src={AuthImage} alt="auth" width={400} height={400} />
-        </div>
+        <Link href="/">
+          <div className="auth__image">
+            <Image src={AuthImage} alt="auth" width={400} height={400} />
+          </div>
+        </Link>
       </div>
 
       <div className="auth__details">
