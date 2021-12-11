@@ -103,7 +103,8 @@
   color:var(--blue);
 }
 .mobile-nav__link{
-  margin-top:1rem;
+  margin-top:1.5rem;
+  margin-right:1.5rem;
   font-size:1rem;
   font-weight:400;
 }

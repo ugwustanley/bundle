@@ -105,12 +105,11 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="connect__text">
+          <div className="why-us__text">
             <h3>Why choose us?</h3>
             <p>
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis{" "}
+            We deliver accurately and timely while ensuring that every information you give us access to is safe and secure. We are also available if you need help!
+
             </p>
           </div>
         </div>
