@@ -6,6 +6,7 @@ import '../styles/auth.css'
 import '../styles/sidebar.css'
 import '../styles/statement.css'
 import '../styles/chart.css'
+import '../styles/preloader.css'
 
 function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />
