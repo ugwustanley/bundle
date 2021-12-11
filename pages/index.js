@@ -2,7 +2,7 @@ import{useState} from 'react';
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
-import Amico from "../images/amico.svg";
+import Intro from "../images/intro.svg";
 import Send from "../images/send.svg";
 import Connect from "../images/connect.svg";
 import Support from "../images/icons/support.svg";
@@ -46,7 +46,7 @@ export default function Home() {
           </div>
 
           <div className="intro__image">
-            <Image src={Amico} alt="amico" />
+            <Image src={Intro} alt="amico" />
           </div>
         </div>
 
