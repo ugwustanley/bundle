@@ -42,7 +42,7 @@ export default function Home() {
               We help our customers seamlessly monitor their transactions across
               all accounts while providing added features.
             </p>
-            <button>Get Started</button>
+            <Link href="./signup"><button>Get Started</button></Link>
           </div>
 
           <div className="intro__image">
@@ -58,7 +58,7 @@ export default function Home() {
           <div className="connect__text">
             <h3>Connect all your accounts on one platform</h3>
             <p>You don’t have to login to different platforms every time</p>
-            <button>Learn More</button>
+            <Link href="./signup"><button>Learn More</button></Link>
           </div>
         </div>
 
@@ -69,7 +69,7 @@ export default function Home() {
               Easily get your account statements, send or even request account
               statements from others!
             </p>
-            <button>Learn More</button>
+            <Link href="./signup"><button>Learn More</button></Link>
           </div>
 
           <div className="send__image">
@@ -117,7 +117,7 @@ export default function Home() {
         <div className="join-us">
           <div className="join-us-box">
             <h3>Ready to join us?</h3>
-            <Link href="#">
+            <Link href="./signup">
               <button>Get Started</button>
             </Link>
           </div>
