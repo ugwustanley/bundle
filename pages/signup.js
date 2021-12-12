@@ -12,13 +12,12 @@ import axios from "axios";
 export default function Signup() {
   const [response, setResponse] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [hasError, setHasError] = useState(false);
   const [showPreloader, setShowPreloader] = useState(true);
   const [formComplete, setFormComplete] = useState(true);
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [password2, setPassword2] = useState();
-  const [fullName, setFullName] = useState();
+  // const [fullName, setFullName] = useState();
   const [username, setUsername] = useState();
   const [btn, setBtn] = useState("Sign Up");
   const [err, setErr] = useState();
@@ -26,9 +25,13 @@ export default function Signup() {
   async function handleRegister(e) {
     e.preventDefault();
 
-    if (!email || !password || !fullName || !username || !password2) {
+    if (!email || !password  || !username || !password2) {
       setErr("Incomplete Input");
       setFormComplete(false);
+      return;
+    }
+    if (password !== password2) {
+      setErr("The two password do not match");
       return;
     }
 
@@ -44,35 +47,32 @@ export default function Signup() {
       password1: password,
       password2: password2,
     };
-    const headers = {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-    };
+
     console.log(load);
     try {
       axios({
-        method: "POST",
-        headers: headers,
-        url: `https://bundle-backend.herokuapp.com/auth/registration`,
+        method: "post",
+        url: "https://bundle-backend.herokuapp.com/auth/registration/",
         data: JSON.stringify(load),
+        headers: { "Content-Type": "application/json" },
       })
-        // .post(`https://bundle-backend.herokuapp.com/auth/registration`, {
-        //   params: JSON.stringify(load),
-        //   headers: headers,
-        // })
         .then((res) => {
+          setBtn("Sign Up");
           setResponse(res.data);
           setLoading(false);
           console.log(res.data);
+          window.location.href = "/login";
         })
         .catch(() => {
-          setHasError(true);
+          setBtn("Sign Up");
+          setErr(
+            "An error occurred while trying to register user. Check your input and try again"
+          );
           setLoading(false);
         });
     } catch (err) {
       console.log(err);
-      setBtn("SignUp");
-
+      setBtn("Sign Up");
       setErr("An error occurred");
     }
   }
@@ -103,7 +103,7 @@ export default function Signup() {
 
           <form className="auth__form">
             <p style={{ color: "red" }}>{err}</p>
-            <input
+            {/* <input
               onChange={(e) => setFullName(e.target.value)}
               type="text"
               placeholder="Full Name"
@@ -111,7 +111,7 @@ export default function Signup() {
               className={
                 formComplete ? "auth__input" : "auth__input auth__input--err"
               }
-            />
+            /> */}
             <input
               onChange={(e) => setUsername(e.target.value)}
               type="text"

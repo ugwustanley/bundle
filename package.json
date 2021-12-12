@@ -8,6 +8,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@mono.co/connect.js": "^0.2.2",
     "axios": "^0.24.0",
     "chart.js": "^3.6.2",
     "framer-motion": "^5.4.5",
