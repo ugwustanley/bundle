@@ -38,12 +38,16 @@ export default function Login() {
               type="email"
               placeholder="Email Address"
               name="email"
-              className="auth__input"
+              className={
+                formComplete ? "auth__input" : "auth__input auth__input--err"
+              }
             />
             <input
               type="password"
               placeholder="Enter Password"
-              className="auth__input"
+              className={
+                formComplete ? "auth__input" : "auth__input auth__input--err"
+              }
             />
             <button className="auth__button auth__button--login">
               Sign In

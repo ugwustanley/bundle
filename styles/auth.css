@@ -136,3 +136,7 @@
     margin-top: -2.2rem;
   }
 }
+
+.auth__input--err{
+  border: 1px solid rgb(223, 137, 137) !important;
+}
