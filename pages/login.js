@@ -4,7 +4,7 @@ import Link from "next/link";
 import AuthImage from "../images/auth.svg";
 import Logo2 from "../images/logo-2.svg";
 import Google from "../images/icons/Google Icon.svg";
-import Preloader from "../components/preloader";
+import Preloader2 from "../components/preloader2";
 import { AnimatePresence, motion } from "framer-motion";
 import axios from "axios";
 
@@ -72,10 +72,10 @@ export default function Login() {
 
   setTimeout(() => {
     setShowPreloader(false);
-  }, 5000);
+  }, 1300);
   return (
     <>
-      <AnimatePresence>{showPreloader ? <Preloader /> : null}</AnimatePresence>
+      <AnimatePresence>{showPreloader ? <Preloader2 /> : null}</AnimatePresence>
       <div className="auth">
         <div className="auth__image-container">
           <h3>Sign In</h3>

@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
 import Sidebar from "../../components/sidebar";
@@ -6,6 +8,12 @@ import Notify from "../../images/icons/notify.svg";
 import Avatar from "../../images/icons/avatar.svg";
 
 export default function Estimate() {
+  const router = useRouter();
+  // useEffect(() => {
+  //   if (!(JSON.parse(localStorage.getItem("token")))) {
+  //     router.replace("/");
+  //   }
+  // }, []);
   return (
     <>
       <div className="statement dash">

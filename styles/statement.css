@@ -2,12 +2,14 @@
   display: grid;
   grid-template-columns: 1fr 4fr;
   overflow-y: hidden;
+  
 }
 .dash__details {
   overflow-y: scroll;
   width: 100%;
   height: 100vh;
   padding: 1rem 3rem;
+  padding-bottom:5rem;
 }
 .dash-nav {
   display: flex;
@@ -72,6 +74,7 @@
     width:100%;
     background-color:
     rgba(208, 213, 241, 0.15);
+    
     margin-top:3rem;
     border-radius:10px;
     padding:1.5rem;
@@ -79,11 +82,18 @@
 }
 .transaction-table__item{
     display:grid;
-    grid-template-columns:repeat(5, 1fr);
-    font-weight:500;
-    font-size:.88rem;
+    grid-template-columns:1fr 3fr 1fr 1fr 1fr;
+    font-weight:400;
+    font-size:.78rem;
+    margin-right:auto;
+    text-align:left;
 }
-
+.transaction-table__item p{
+  margin-right:1rem !important;
+}
+.narration{
+  font-size:.6rem;
+}
 .transaction-table__header{
     color:var(--blue);
     font-size:.9rem;

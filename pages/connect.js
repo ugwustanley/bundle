@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useContext } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import AuthImage from "../images/auth.svg";
@@ -6,10 +6,13 @@ import Logo2 from "../images/logo-2.svg";
 import Google from "../images/icons/Google Icon.svg";
 import Preloader from "../components/preloader";
 import { AnimatePresence, motion } from "framer-motion";
+import { TransContext } from "../context/transContext";
 import axios from "axios";
 import MonoConnect from "@mono.co/connect.js";
 
 export default function Connect() {
+  const [trans, setTrans] = useContext(TransContext);
+  console.log(trans, "trans");
   const [showPreloader, setShowPreloader] = useState(true);
   const [response, setResponse] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -18,6 +21,7 @@ export default function Connect() {
   const [btn, setBtn] = useState("Connect Account");
   const [code, setCode] = useState("");
   const [err, setErr] = useState();
+  const [acc, setAcc] = useState();
 
   const [scriptLoaded, setScriptLoaded] = useState(false);
   useEffect(async () => {
@@ -26,8 +30,7 @@ export default function Connect() {
         mono_id: code,
         account_name: name,
       };
-      console.log(load);
-      console.log("reached try catch");
+      setShowPreloader(true);
       try {
         setBtn("Please wait...");
         const key = localStorage.getItem("token");
@@ -60,6 +63,8 @@ export default function Connect() {
               //request2.data[0].mono_id,
             };
             console.log(request2, "request2 just came back");
+            setAcc({ accounts: request2.data });
+            localStorage.setItem("accounts", JSON.stringify(request2.data));
             const request3 = await axios({
               method: "post",
               url: "https://bundle-backend.herokuapp.com/connect/transactions/",
@@ -71,6 +76,14 @@ export default function Connect() {
             });
             if (request3) {
               console.log(request3, "request3 just came back");
+              setTrans({ ...acc, transactions: request3.data.data.data });
+              localStorage.setItem(
+                "transactions",
+                JSON.stringify(request3.data.data.data)
+              );
+              console.log(typeof request3.data.data.data, "transactions");
+              window.location.href = "/dashboard/statement"
+              setTimeout(() => {setShowPreloader(false);} , 2000)
             }
           }
         }
