@@ -17,7 +17,7 @@ export default function Connect() {
   const [loading, setLoading] = useState(false);
   const [formComplete, setFormComplete] = useState(true);
   const [hasError, setHasError] = useState(false);
-  const [name, setName] = useState()
+  const [name, setName] = useState('')
   const [btn, setBtn] = useState("Connect Account");
   const [err, setErr] = useState();
 
