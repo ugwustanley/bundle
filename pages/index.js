@@ -9,7 +9,7 @@ import Support from "../images/icons/support.svg";
 import Speed from "../images/icons/speed.svg";
 import Security from "../images/icons/security.svg";
 import Accuracy from "../images/icons/accuracy.svg";
-import Preloader from "../components/Preloader";
+import Preloader from "../components/preloader";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import { motion, AnimatePresence } from "framer-motion";
