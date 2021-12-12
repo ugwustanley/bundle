@@ -1,0 +1,142 @@
+.auth {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  min-height: 100vh;
+  height:auto;
+  font-family: "Poppins", sans-serif;
+}
+.auth__image-container {
+  background: var(--blue);
+  display: grid;
+  place-content: center;
+  text-align: center;
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 100;
+}
+.auth__image-container h3 {
+  font-weight: 200;
+}
+
+.auth__details {
+  margin: auto;
+  text-align: center;
+  display: grid;
+  place-content: center;
+  padding-top:2rem;
+}
+.auth__details h3 {
+  font-size: 36px;
+  margin: 0;
+  color: var(--black);
+  font-weight: 500;
+}
+
+.auth__details p {
+  font-size: 0.95rem;
+  margin: 0;
+  color: var(--blue);
+  margin-bottom: 1.4rem;
+}
+.auth__details h6 {
+  font-size: 0.95rem;
+  font-weight: 400;
+  margin: 0;
+  color: var(--black);
+  margin-bottom: 1.4rem;
+  margin-top: 1rem;
+}
+.auth__details h6 b {
+  color: var(--blue);
+  cursor:pointer;
+}
+.auth__details input {
+  width: 100%;
+  max-width: 500px;
+  margin-top: 30px;
+  font-size: 0.9rem;
+  padding: 1.1rem 1.5rem;
+  outline: none;
+  border: 0;
+  border-radius: 8px;
+  background: rgba(245, 244, 244, 1);
+}
+
+.auth__details button {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 1.3rem;
+  font-size: 1rem;
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  border: 2px solid var(--blue);
+  cursor: pointer;
+  
+}
+.auth__line {
+  background: #e5e5e5;
+  width: 80%;
+  max-width: 500px;
+  margin: auto;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  height: 1px;
+}
+.auth__or {
+  margin: auto;
+  margin-top: -2.1rem;
+  background: #fff;
+  width: fit-content;
+  color: var(--black);
+  font-size: 1rem;
+}
+.auth__button--login {
+  background: var(--blue);
+  color: #fff;
+  margin:auto;
+  margin-top: 30px;
+}
+
+.auth__button--google {
+  color: var(--blue);
+  background: #fff;
+  display: grid;
+  place-content: center !important;
+  height: 50px;
+  margin:auto;
+}
+.auth__button--google p {
+  margin-top: 0;
+  margin-bottom: 5px;
+  font-weight: 600;
+  margin-left: 1rem;
+}
+@media (max-width: 1100px) {
+  .auth {
+    grid-template-columns: 1fr;
+  }
+  .auth__image-container {
+    display: none;
+  }
+  .auth__details {
+    padding: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth__button--google {
+    height: 60px;
+  }
+  .auth__or {
+    margin: auto;
+    margin-top: -2.2rem;
+  }
+}
+
+.auth__input--err{
+  border: 1px solid rgb(223, 137, 137) !important;
+}

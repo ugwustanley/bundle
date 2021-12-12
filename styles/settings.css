@@ -1,0 +1,46 @@
+/* .settings{
+    font-family:'Poppins';
+} */
+.personal__info h3{
+    font-size: 1.6em;
+    font-weight:500;
+}
+.personal__info__items{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap:2rem;
+}
+.personal__info__item h5{
+    font-size: 1.2em;
+    font-weight:500;
+    margin-bottom:15px;
+}
+
+.personal__info__item div {
+   border:1px solid #e6e6e6;
+   border-radius:10px;
+   padding:.4rem 2rem;
+   width:100%;
+   max-width:300px;
+   font-weight:400;
+   font-size:1rem;
+}
+
+.personal__info__item-btn{
+    display:grid;
+    align-items:flex-end;
+    justify-items:flex-start;
+}
+
+.personal__info__item-btn button{
+    background:var(--blue);
+    outline:none;
+    border:none;
+    padding:1.5rem 3rem;
+    font-size:1rem;
+    border-radius:10px;
+    color:white;
+    border:none;
+    cursor:pointer;
+    margin-top:2rem;
+}

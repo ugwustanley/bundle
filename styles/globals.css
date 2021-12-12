@@ -8,6 +8,7 @@ body {
 :root {
   --blue: #132eba;
   --black: rgba(0, 0, 0, 1);
+  font-family: "Poppins", sans-serif;
 }
 
 a {

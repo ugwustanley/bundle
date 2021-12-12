@@ -14,13 +14,13 @@ export default function Navbar({ showNav, setShowNav }) {
         <div className="nav__link-container">
           <ul className="nav__links">
             <li className="nav__link nav__link--stories">
-              <Link href="./#">
+              <Link href="#">
                 <a>Stories</a>
               </Link>
             </li>
             <li className="nav__link nav__link--faq">
               <Link href="./#">
-                <a>FAGs</a>
+                <a>FAQs</a>
               </Link>
             </li>
             <li className="nav__link nav__link--sign-in">
@@ -29,7 +29,7 @@ export default function Navbar({ showNav, setShowNav }) {
               </Link>
             </li>
             <li className="nav__link nav__link--sign-up">
-              <Link href="./login">
+              <Link href="./signup">
                 <button>Sign up</button>
               </Link>
             </li>
@@ -67,13 +67,13 @@ export default function Navbar({ showNav, setShowNav }) {
       >
         <ul className="mobile-nav__links">
           <li className="mobile-nav__link mobile-nav__link--stories">
-            <Link href="./#">
+            <Link href="#">
               <a>Stories</a>
             </Link>
           </li>
           <li className="mobile-nav__link mobile-nav__link--faq">
-            <Link href="./#">
-              <a>FAGs</a>
+            <Link href="#">
+              <a>FAQs</a>
             </Link>
           </li>
           <li className="mobile-nav__link mobile-nav__link--sign-in">
@@ -82,7 +82,7 @@ export default function Navbar({ showNav, setShowNav }) {
             </Link>
           </li>
           <li className="mobile-nav__link mobile-nav__link--sign-up">
-            <Link href="./login">
+            <Link href="./signup">
               <button>Sign up</button>
             </Link>
           </li>
