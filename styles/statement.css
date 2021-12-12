@@ -1,34 +1,111 @@
-.dash{
-    display:grid;
-    grid-template-columns:1fr 4fr;
-    overflow-y:hidden;
+.dash {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  overflow-y: hidden;
 }
-.dash__details{
-    overflow-y:scroll;
+.dash__details {
+  overflow-y: scroll;
+  width: 100%;
+  height: 100vh;
+  padding: 1rem 3rem;
+}
+.dash-nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dash-nav p {
+  font-weight: 600;
+  cursor: pointer;
+  padding-bottom: 5px;
+}
+.dash-nav h2 {
+  font-size: 36px;
+  font-weight: 500;
+}
+
+.dash-nav__items {
+  display: flex;
+  align-items: center;
+}
+
+.dash-nav__notify,
+.dash-nav__user {
+  margin-left: 1rem;
+}
+
+.statement__config {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-bottom:2rem;
+}
+
+.statement__config label {
+  display: block;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  font-weight:500;
+  
+}
+
+.accounts__box select{
+    border:1px solid var(--blue);
+    padding:0.65rem 0.5rem;
+    border-radius:5px;  
+    font-size:1rem;
+    outline:none;
+}
+.statement__config input{
+    border:1px solid var(--blue);
+    padding:0.5rem;
+    border-radius:5px;  
+    font-size:1rem;
+    outline:none;
+}
+
+.accounts__box option{
+    border:1px solid var(--blue);
+    padding:0.5rem;
+}
+
+.transaction-table{
+    width:100%;
+    background-color:
+    rgba(208, 213, 241, 0.15);
+    margin-top:3rem;
+    border-radius:10px;
+    padding:1.5rem;
+    padding-bottom:3rem;
+}
+.transaction-table__item{
+    display:grid;
+    grid-template-columns:repeat(5, 1fr);
+    font-weight:500;
+    font-size:.88rem;
+}
+
+.transaction-table__header{
+    color:var(--blue);
+    font-size:.9rem;
+    font-weight:500;
+    border-bottom:2px solid #c2c8e2;
+}
+.small-screen__alert{
+    display:none;
     width:100%;
     height:100vh;
-    padding:1rem 3rem;
-}
-.dash-nav{
-    display:flex;
-    justify-content:space-between;
 }
 
-.dash-nav p{
-    font-weight:600;
-    cursor:pointer;
-    padding-bottom:5px;
-}
-.dash-nav h2{
-   font-size:36px;
-   font-weight:500;
-}
-
-.dash-nav__items{
-    display:flex;
-    align-items:center;
-}
-
-.dash-nav__notify, .dash-nav__user{
-    margin-left:1rem;
+@media (max-width:1000px){
+    .dash{
+        display:none;
+    }
+    .small-screen__alert{
+        display:grid;
+        place-content:center;
+    }
+    .small-screen__alert p{
+        margin:2rem;
+        text-align:center;
+    }
 }

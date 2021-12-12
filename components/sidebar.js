@@ -6,7 +6,7 @@ import Request from  '../images/icons/request.svg'
 import Estimate from '../images/icons/estimate.svg'
 import Send from '../images/icons/send.svg'
 import Settings from '../images/icons/settings.svg'
-export default function(){
+export default function({activeTab}){
     return(
         <div className="sidebar">
             <div className="sidebar__logo">
@@ -16,32 +16,32 @@ export default function(){
             <div className="sidebar__links-container">
                 <ul className="sidebar__links">
                      <Link href="./statement">
-                         <li className="sidebar__link sidebar__link--active">
+                         <li className={activeTab === 'statement' ? `sidebar__link sidebar__link--active`: `sidebar__link`}>
                              <Image src={Statement} width={20} height={20} alt="account statement"/>
                              <p> Account Statement</p>
                          </li>
                      </Link>
 
                        <Link href="./estimate">
-                         <li className="sidebar__link">
+                         <li className={activeTab === 'estimate' ? `sidebar__link sidebar__link--active`: `sidebar__link`}>
                              <Image src={Estimate} width={20} height={20} alt="account estimate"/>
                              <p>Estimate</p>
                          </li>
                        </Link>
                        <Link href="./send">
-                         <li className="sidebar__link">
+                         <li className={activeTab === 'send' ? `sidebar__link sidebar__link--active`: `sidebar__link`}>
                              <Image src={Send} width={20} height={20} alt="send statement"/>
                              <p>Send</p>
                          </li>
                      </Link>
                      <Link href="./request">
-                         <li className="sidebar__link">
+                         <li className={activeTab === 'request' ? `sidebar__link sidebar__link--active`: `sidebar__link`}>
                              <Image src={Request} width={20} height={20} alt="request statement"/>
                              <p>Request</p>
                          </li>
                      </Link>  
                      <Link href="./settings">
-                         <li className="sidebar__link">
+                         <li className={activeTab === 'settings' ? `sidebar__link sidebar__link--active`: `sidebar__link`}>
                              <Image src={Settings} width={20} height={20} alt="account settings"/>
                              <p>Settings</p>
                          </li>
