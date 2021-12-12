@@ -52,6 +52,7 @@ export default function Login() {
           setLoading(false);
           console.log(res.data);
           setBtn("Sign In");
+          localStorage.setItem("token", res.data.key);
           window.location.href = "/connect";
         })
         .catch(() => {

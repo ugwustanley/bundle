@@ -1,4 +1,4 @@
-import { useState , useMemo } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import AuthImage from "../images/auth.svg";
@@ -7,77 +7,110 @@ import Google from "../images/icons/Google Icon.svg";
 import Preloader from "../components/preloader";
 import { AnimatePresence, motion } from "framer-motion";
 import axios from "axios";
-import MonoConnect from '@mono.co/connect.js';
-
-
+import MonoConnect from "@mono.co/connect.js";
 
 export default function Connect() {
   const [showPreloader, setShowPreloader] = useState(true);
   const [response, setResponse] = useState(null);
   const [loading, setLoading] = useState(false);
   const [formComplete, setFormComplete] = useState(true);
-  const [hasError, setHasError] = useState(false);
-  const [name, setName] = useState('')
+  const [name, setName] = useState("");
   const [btn, setBtn] = useState("Connect Account");
+  const [code, setCode] = useState("");
   const [err, setErr] = useState();
 
-  const monoConnect = useMemo(() => {
+  const [scriptLoaded, setScriptLoaded] = useState(false);
+  useEffect(async () => {
+    if (code.length >= 3) {
+      let load = {
+        mono_id: code,
+        account_name: name,
+      };
+      console.log(load);
+      console.log("reached try catch");
+      try {
+        setBtn("Please wait...");
+        const key = localStorage.getItem("token");
+        const auth = `token${" "}${key}`;
+        console.log(auth, key);
+        const request1 = await axios({
+          method: "post",
+          url: "https://bundle-backend.herokuapp.com/connect/monoid/",
+          data: JSON.stringify(load),
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: auth,
+          },
+        });
+
+        if (request1) {
+          console.log(request1, "request1 just came back");
+          const request2 = await axios({
+            method: "get",
+            url: "https://bundle-backend.herokuapp.com/connect/monoid/",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: auth,
+            },
+          });
+
+          if (request2) {
+            const load = {
+              mono_id: code,
+              //request2.data[0].mono_id,
+            };
+            console.log(request2, "request2 just came back");
+            const request3 = await axios({
+              method: "post",
+              url: "https://bundle-backend.herokuapp.com/connect/transactions/",
+              data: JSON.stringify(load),
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: auth,
+              },
+            });
+            if (request3) {
+              console.log(request3, "request3 just came back");
+            }
+          }
+        }
+      } catch (err) {
+        console.log(err);
+        setBtn("Connect Account");
+
+        setErr("An error occurred");
+      }
+    }
+  }, [code]);
+
+  const openMonoWidget = useCallback(async () => {
+    const MonoConnect = (await import("@mono.co/connect.js")).default;
+
     const monoInstance = new MonoConnect({
-      onClose: () => console.log('Widget closed'),
-      onLoad: () => console.log('Widget loaded successfully'),
-      onSuccess: ({ code }) => console.log(`Linked successfully: ${code}`),
-      key: "test_pk_C4Besc1jIOs27aQwgBBt"
-      
-    })
+      key: "test_pk_C4Besc1jIOs27aQwgBBt",
+      onClose: () => {
+        console.log("widget closed");
+      },
+      onLoad: () => console.log("widget loaded"),
+      onSuccess: ({ code }) => {
+        setCode(code), console.log(code);
+      },
+    });
 
-    monoInstance.setup()
-    
-    return monoInstance;
-  }, [])
+    monoInstance.setup();
+    monoInstance.open();
+  }, []);
 
+  //"test_pk_C4Besc1jIOs27aQwgBBt"
   async function handleConnect(e) {
     e.preventDefault();
 
     if (!name) {
-        setErr("Incomplete Input");
-        setFormComplete(false);
-        return;
-      }
-      monoConnect.open()
-    // setBtn("Please wait...");
-    // const load = {
-    //   username: '',
-    //   password: '',
-    // };
-
-    // console.log(load);
-    // try {
-
-    //   axios({
-    //     method: "post",
-    //     url: "https://bundle-backend.herokuapp.com/auth/login/",
-    //     data: JSON.stringify(load),
-    //     headers: { "Content-Type": "application/json" },
-    //   })
-
-    //     .then((res) => {
-    //       setResponse(res.data);
-    //       setLoading(false);
-    //       console.log(res.data);
-    //       setBtn("Sign In");
-    //       window.location.href = "/dashboard/statement";
-    //     })
-    //     .catch(() => {
-    //       setHasError(true);
-    //       setLoading(false);
-    //       setBtn("Sign In");
-    //     });
-    // } catch (err) {
-    //   console.log(err);
-    //   setBtn("Sign In");
-
-    //   setErr("An error occurred");
-    // }
+      setErr("Incomplete Input");
+      setFormComplete(false);
+      return;
+    }
+    await openMonoWidget();
   }
 
   setTimeout(() => {
