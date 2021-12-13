@@ -24,7 +24,7 @@ export default function Estimate() {
             <h2>Estimate</h2>
 
             <div className="dash-nav__items">
-              <Link href="">
+              <Link href="/">
                 <p>Logout</p>
               </Link>
               <div className="dash-nav__notify">

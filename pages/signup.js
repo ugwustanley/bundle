@@ -64,7 +64,7 @@ export default function Signup() {
         .catch(() => {
           setBtn("Sign Up");
           setErr(
-            "An error occurred while trying to register user. Check your input and try again"
+            "An error occurred, check your input and try again. Password must be complex containing letters, numbers and special characters alike"
           );
           setLoading(false);
         });

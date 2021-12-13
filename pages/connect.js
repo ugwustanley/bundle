@@ -83,7 +83,7 @@ export default function Connect() {
               );
               console.log(typeof request3.data.data.data, "transactions");
               window.location.href = "/dashboard/statement"
-              setTimeout(() => {setShowPreloader(false);} , 2000)
+              setTimeout(() => {setShowPreloader(false);} , 3000)
             }
           }
         }

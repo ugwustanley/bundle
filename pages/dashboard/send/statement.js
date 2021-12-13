@@ -1,19 +1,19 @@
 import Link from "next/link";
 import Image from "next/image";
-import Sidebar from "../../components/sidebar";
-import Chart from "../../components/chart";
-import Notify from "../../images/icons/notify.svg";
-import Avatar from "../../images/icons/avatar.svg";
+import Sidebar from "../../../components/sidebar";
+import Chart from "../../../components/chart";
+import Notify from "../../../images/icons/notify.svg";
+import Avatar from "../../../images/icons/avatar.svg";
 
 export default function Settings() {
   return (
     <>
       <div className="settings dash">
-        <Sidebar activeTab="settings" />
+        <Sidebar activeTab="send" />
 
-        <div className="statement__details dash__details">
+        <div className="statement__details dash__details settings__details">
           <nav className="dash-nav">
-            <h2>Settings</h2>
+            <h2>Send Statement</h2>
 
             <div className="dash-nav__items">
               <Link href="/">
@@ -35,39 +35,43 @@ export default function Settings() {
             </div>
           </nav>
           <div className="personal__info">
-            <h3>Personal Information</h3>
-
             <div className="personal__info__items">
               <div className="personal__info__item">
-                <h5>Full Name</h5>
-                <div>
-                  <p>Ugwu Stanley</p>
-                </div>
+                <h5>Receiver’s bundle username</h5>
+                <input type="text" className="send__input" name="send__input" />
               </div>
 
               <div className="personal__info__item">
-                <h5>Username</h5>
-                <div>
-                  <p>Ugwustanley</p>
-                </div>
+                <h5>Receiver’s bundle email</h5>
+                <input
+                  type="email"
+                  className="send__input"
+                  name="send__input"
+                />
               </div>
 
               <div className="personal__info__item">
-                <h5>Email Address</h5>
-                <div>
-                  <p>ugwuchiagoziestanley@gmail.com</p>
-                </div>
+                <h5>Start Date</h5>
+                <input type="date" className="send__input" name="send__input" />
               </div>
 
               <div className="personal__info__item">
-                <h5>Bank Verification Number (BVN)</h5>
-                <div>
-                  <p>000000000000</p>
-                </div>
+                <h5>End Date</h5>
+                <input type="date" className="send__input" name="send__input" />
               </div>
 
-              <div className="personal__info__item personal__info__item-btn">
-                <button>Change Password</button>
+              <div className="personal__info__item">
+                <h5>Narration/reason</h5>
+                <textarea
+                  className="send__input"
+                  rows={10}
+                  cols={10}
+                  name="send__input"
+                ></textarea>
+              </div>
+
+              <div className="personal__info__item personal__info__item-btn personal__info__item-send">
+                <button>Send</button>
               </div>
             </div>
           </div>

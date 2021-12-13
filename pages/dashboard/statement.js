@@ -7,6 +7,8 @@ import Chart from "../../components/chart";
 import Notify from "../../images/icons/notify.svg";
 import Avatar from "../../images/icons/avatar.svg";
 import moment from "moment";
+import html2canvas from "html2canvas";
+import { jsPDF } from "jspdf";
 
 export default function Statement() {
   const [trans, setTrans] = useState();
@@ -19,13 +21,32 @@ export default function Statement() {
     setAcc(accounts);
   }, []);
 
+  const downloadPdfDocument = (rootElementId) => {
+    const input = document.getElementById(rootElementId);
+    html2canvas(input).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF();
+      pdf.addImage(imgData, "JPEG", 0, 0);
+      pdf.save("Transactions.pdf");
+    });
+  };
+
   const router = useRouter();
-  // useEffect(() => {
-  //   if (!JSON.parse(localStorage.getItem("token"))) {
+  // const isClient = typeof window !== undefined;
+
+  //   if (isClient && !JSON.parse(window.localStorage.getItem("token"))) {
   //     router.replace("/");
   //     return;
   //   }
-  // }, []);
+
+  // if (typeof window !== "undefined") {
+  //   if (localStorage.getItem("watchlist")) {
+  //     return JSON.parse(localStorage.getItem("watchlist"));
+  //   } else {
+  //     return [];
+  //   }
+  // }
+
   return (
     <>
       <div className="statement dash">
@@ -36,7 +57,7 @@ export default function Statement() {
             <h2>Account Statement</h2>
 
             <div className="dash-nav__items">
-              <Link href="">
+              <Link href="/">
                 <p>Logout</p>
               </Link>
               <div className="dash-nav__notify">
@@ -54,7 +75,7 @@ export default function Statement() {
               </Link>
             </div>
           </nav>
-          <div className="statement__config">
+          <div className="statement__config" id="statement__table">
             <div className="accounts__box">
               {" "}
               <label for="account-options">Select Account</label>
@@ -88,7 +109,8 @@ export default function Statement() {
             </div>
           </div>
           <Chart />
-          <div className="transaction-table">
+
+          <div className="transaction-table" id="trans__table">
             {/* heading for table */}
             <div className="transaction-table__item transaction-table__header">
               <p>Date</p>
@@ -110,6 +132,12 @@ export default function Statement() {
                 ))
               : null}
             {/* {trans ? console.log(trans[2], "0099") : null} */}
+          </div>
+
+          <div className="statement__download">
+            <button onClick={() => downloadPdfDocument("trans__table")}>
+              Download PDF
+            </button>
           </div>
         </div>
       </div>
