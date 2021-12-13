@@ -133,8 +133,8 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, ease: "easeInOut", delay: 0.2 }}
             >
-              Easily get your account statements, send or even request account
-              statements from others!
+              Easy access to all your account statements. Send or Receive payments
+              and account statements from others
             </motion.p>
             <Link href="./signup">
               <motion.button
@@ -197,9 +197,8 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, ease: "easeInOut", delay: 0.2 }}
             >
-              We deliver accurately and timely while ensuring that every
-              information you give us access to is safe and secure. We are also
-              available if you need help!
+              Accurate and timely delivery ensuring your information is safe 
+              and secure. We provide 24/7 support to ensure you have the best
             </motion.p>
           </div>
         </div>

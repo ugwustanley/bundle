@@ -4,8 +4,83 @@ import Sidebar from "../../../components/sidebar";
 import Chart from "../../../components/chart";
 import Notify from "../../../images/icons/notify.svg";
 import Avatar from "../../../images/icons/avatar.svg";
+import { useState } from "react";
+import axios from "axios";
 
 export default function Settings() {
+  const[name, setName] = useState();
+  const[narration, setNarration] = useState();
+  const[timeline, setTimeline] = useState();
+  const[account, setAccount] = useState();
+  const[formComplete, setFormComplete] = useState(true);
+  const[btn, setBtn] = useState("Request");
+  const[err, setErr] = useState();
+  const[success, setSuccess] = useState();
+  const[showMessage, setShowMessage] = useState(false);
+
+  function handleModal() {
+    setShowMessage(false);
+    console.log("reached");
+  }
+
+  async function handleSend(e) {
+    e.preventDefault();
+
+    if (!name || !narration || !timeline || !account) {
+      setFormComplete(false);
+      return;
+    }
+
+    setFormComplete(true);
+    setBtn("Please wait...");
+    const load = {
+      receiver: name,
+      reason: narration,
+      timeline: timeline,
+      mono_id: account,
+    };
+
+    console.log(load);
+
+    const key = localStorage.getItem("token");
+    const auth = `token${" "}${key}`;
+    try {
+      axios({
+        method: "post",
+        url: "https://bundle-backend.herokuapp.com/connect/sendstatement/",
+        data: JSON.stringify(load),
+        headers: { "Content-Type": "application/json", Authorization: auth },
+      })
+        .then((res) => {
+          console.log(res.data);
+          setBtn("Request");
+          setSuccess(true);
+          setShowMessage(true);
+          setName("");
+          setNarration("");
+          setTimeline("");
+          setAccount("");
+        })
+        .catch((err) => {
+          setBtn("Request");
+          setErr("An error occured while trying to send statement");
+          setShowMessage(true);
+          setName("");
+          setNarration("");
+          setTimeline("");
+          setAccount("");
+        });
+      } catch (err) {
+        setBtn("Request");
+        setErr("An error occured");
+        setShowMessage(true);
+        setName("");
+        setNarration("");
+        setTimeline("");
+        setAccount("");
+      }
+    } 
+
   return (
     <>
       <div className="settings dash">
@@ -42,22 +117,33 @@ export default function Settings() {
               </div>
 
               <div className="personal__info__item">
-                <h5>Receiver’s bundle email</h5>
+                <h5>Timeline</h5>
                 <input
                   type="email"
                   className="send__input"
                   name="send__input"
+                  // make this a dropdown
                 />
               </div>
 
               <div className="personal__info__item">
-                <h5>Start Date</h5>
-                <input type="date" className="send__input" name="send__input" />
+                <h5>Select Account</h5>
+                <input 
+                  type="date" 
+                  className="send__input" 
+                  name="send__input" 
+                  // make this a dropdown with the accounts GET request
+                />
               </div>
 
               <div className="personal__info__item">
                 <h5>End Date</h5>
-                <input type="date" className="send__input" name="send__input" />
+                <input 
+                  type="date" 
+                  className="send__input" 
+                  name="send__input" 
+                  // you can delete this
+                />
               </div>
 
               <div className="personal__info__item">
