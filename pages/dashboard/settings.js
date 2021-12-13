@@ -1,4 +1,5 @@
 import Link from "next/link";
+import {useState, useEffect} from 'react'
 import Image from "next/image";
 import Sidebar from "../../components/sidebar";
 import Chart from "../../components/chart";
@@ -6,6 +7,21 @@ import Notify from "../../images/icons/notify.svg";
 import Avatar from "../../images/icons/avatar.svg";
 
 export default function Settings() {
+
+  const [email , setEmail] = useState("ugwuchiagoziestanley@gmail.com");
+  const [user , setUser] = useState("");
+  const [name , name] = useState("ugwustanley");
+  
+  useEffect(() => {
+   
+    const user = localStorage.getItem('user');
+    if(user){
+      setUser(JSON.parse(user));
+      setName(JSON.parse(user).userName);
+      setEmail(JSON.parse(user).email)
+    }
+   
+  },[])
   return (
     <>
       <div className="settings dash">
@@ -41,21 +57,21 @@ export default function Settings() {
               <div className="personal__info__item">
                 <h5>Full Name</h5>
                 <div>
-                  <p>Ugwu Stanley</p>
+                  <p>{username}</p>
                 </div>
               </div>
 
               <div className="personal__info__item">
                 <h5>Username</h5>
                 <div>
-                  <p>Ugwustanley</p>
+                  <p>{username}</p>
                 </div>
               </div>
 
               <div className="personal__info__item">
                 <h5>Email Address</h5>
                 <div>
-                  <p>ugwuchiagoziestanley@gmail.com</p>
+                  <p>{email}</p>
                 </div>
               </div>
 

@@ -53,6 +53,7 @@ export default function Login() {
           console.log(res.data);
           setBtn("Sign In");
           localStorage.setItem("token", res.data.key);
+          localStorage.setItem("user", JSON.stringify(res.data.user));
           window.location.href = "/connect";
         })
         .catch(() => {
