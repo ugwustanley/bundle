@@ -38,6 +38,7 @@ export default function Settings() {
     };
 
     console.log(load);
+
     const key = localStorage.getItem("token");
     const auth = `token${" "}${key}`;
     try {
@@ -54,7 +55,7 @@ export default function Settings() {
           setBtn("Request");
           setName("");
           setNarration("");
-          setNarration()
+          setNarration();
         })
         .catch(() => {
           setSuccess(false);
@@ -109,6 +110,7 @@ export default function Settings() {
                 <input
                   onChange={(e) => setName(e.target.value)}
                   type="text"
+                  value={name}
                   className={
                     formComplete
                       ? "send__input"
@@ -122,6 +124,7 @@ export default function Settings() {
                 <h5>Narration/reason</h5>
                 <textarea
                   onChange={(e) => setNarration(e.target.value)}
+                  value={narration}
                   className={
                     formComplete
                       ? "send__input"
