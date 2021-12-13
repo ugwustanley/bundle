@@ -17,7 +17,7 @@ export default function Preloader2() {
         <motion.circle
           initial={{ pathLength: 0 }}
           animate={{
-            pathLength: 1,
+            pathLength: 1.1,
             strokeWidth: [0.5, 1, 1.5],
             x: [ 10, 10, 10, 10, 0],
           }}
@@ -31,7 +31,7 @@ export default function Preloader2() {
         <motion.circle
           initial={{ pathLength: 0 }}
           animate={{
-            pathLength: 1,
+            pathLength: 1.1,
             strokeWidth: [0.5, 1, 1.5],
             x: [-11, -11, -11, -11, 0],
           }}
