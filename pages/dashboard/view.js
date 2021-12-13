@@ -21,7 +21,7 @@ export default function Statement() {
 
   const [acc, setAcc] = useState();
 
-  const [showMessage, setShowMessage] = useState(true);
+  const [showMessage, setShowMessage] = useState(false);
 
   useEffect(() => {
     const transactions = JSON.parse(localStorage.getItem("transactions"));
@@ -91,7 +91,7 @@ export default function Statement() {
                     <p className="narration">{trans[index].balance}</p>
                     <p>{trans[index].amount}</p>
                     <p>{trans[index].type}</p>
-                    <p onClick={() => console.log("done")} className="view">
+                    <p onClick={() => setShowMessage(true)} className="view">
                       view
                     </p>
                   </div>
