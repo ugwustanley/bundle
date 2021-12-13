@@ -2,18 +2,27 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
-import Sidebar from "../../../components/sidebar";
-import Chart from "../../../components/chart";
-import Notify from "../../../images/icons/notify.svg";
-import Avatar from "../../../images/icons/avatar.svg";
-import Send from "../../../images/send-img.svg";
+import Sidebar from "../../components/sidebar";
+import Chart from "../../components/chart";
+import Notify from "../../images/icons/notify.svg";
+import Avatar from "../../images/icons/avatar.svg";
+import ViewModal from "../../components/viewModal";
 import moment from "moment";
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 
 export default function Statement() {
+  function handleViewModal() {
+    setShowMessage(false);
+    console.log("reached");
+  }
+
   const [trans, setTrans] = useState();
+
   const [acc, setAcc] = useState();
+
+  const [showMessage, setShowMessage] = useState(true);
+
   useEffect(() => {
     const transactions = JSON.parse(localStorage.getItem("transactions"));
     const accounts = JSON.parse(localStorage.getItem("accounts"));
@@ -28,7 +37,7 @@ export default function Statement() {
       const imgData = canvas.toDataURL("image/png");
       const pdf = new jsPDF();
       pdf.addImage(imgData, "JPEG", 0, 0);
-      pdf.save("Transactions.pdf");
+      pdf.autoPrint();
     });
   };
 
@@ -36,12 +45,12 @@ export default function Statement() {
 
   return (
     <>
-      <div className="statement dash">
-        <Sidebar activeTab="request" />
+      <div className="view dash">
+        <Sidebar activeTab="view" />
 
         <div className="statement__details dash__details">
           <nav className="dash-nav">
-            <h2>Request</h2>
+            <h2>Account Statement</h2>
 
             <div className="dash-nav__items">
               <Link href="/">
@@ -63,24 +72,36 @@ export default function Statement() {
             </div>
           </nav>
 
-          <div className="send__options">
-            <Link href="./request/statement">
-              <div className="send__option">
-                <div className="send__option-img">
-                  <Image width={100} height={100} src={Send} alt="send" />
-                  <h4>Request Statement</h4>
-                </div>
-              </div>
-            </Link>
-            <Link href="/dashboard/soon">
-            <div className="send__option">
-              <div className="send__option-img">
-                <Image width={100} height={100} src={Send} alt="send" />
-                <h4>Request Payment</h4>
-              </div>
+          <div
+            className="transaction-table sent-request-table"
+            id="trans__table"
+          >
+            {/* heading for table */}
+            <div className="transaction-table__item transaction-table__header  sent-request-table__header">
+              <p>Date Sent</p>
+              <p>Date Received</p>
+              <p>Name of reciever</p>
+              <p>Status</p>
+              <p></p>
             </div>
-            </Link>
+            {trans
+              ? trans.map((unit, index) => (
+                  <div className="transaction-table__item">
+                    <p>{moment(trans[index].date).format("MM/DD/YYYY")}</p>
+                    <p className="narration">{trans[index].balance}</p>
+                    <p>{trans[index].amount}</p>
+                    <p>{trans[index].type}</p>
+                    <p onClick={() => console.log("done")} className="view">
+                      view
+                    </p>
+                  </div>
+                ))
+              : null}
           </div>
+
+          {/* <div className="statement__download">
+            <button onClick={() => setShowMessage(true)}>Download PDF</button>
+          </div> */}
         </div>
       </div>
       <div className="small-screen__alert">
@@ -89,6 +110,9 @@ export default function Statement() {
           desktop device and try again
         </p>
       </div>
+      {showMessage ? (
+        <ViewModal handleModal={handleViewModal}  />
+      ) : null}
     </>
   );
 }

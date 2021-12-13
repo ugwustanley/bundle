@@ -72,12 +72,14 @@ export default function Statement() {
                 </div>
               </div>
             </Link>
-            <div className="send__option">
-              <div className="send__option-img">
-                <Image width={100} height={100} src={Send} alt="send" />
-                <h4>Make Payment</h4>
+            <Link href="/dashboard/soon">
+              <div className="send__option">
+                <div className="send__option-img">
+                  <Image width={100} height={100} src={Send} alt="send" />
+                  <h4>Make Payment</h4>
+                </div>
               </div>
-            </div>
+            </Link>
           </div>
         </div>
       </div>

@@ -4,24 +4,30 @@ import Sidebar from "../../../components/sidebar";
 import Chart from "../../../components/chart";
 import Notify from "../../../images/icons/notify.svg";
 import Avatar from "../../../images/icons/avatar.svg";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function Settings() {
-  const[name, setName] = useState();
-  const[narration, setNarration] = useState();
-  const[timeline, setTimeline] = useState();
-  const[account, setAccount] = useState();
-  const[formComplete, setFormComplete] = useState(true);
-  const[btn, setBtn] = useState("Request");
-  const[err, setErr] = useState();
-  const[success, setSuccess] = useState();
-  const[showMessage, setShowMessage] = useState(false);
+  const [name, setName] = useState();
+  const [narration, setNarration] = useState();
+  const [timeline, setTimeline] = useState();
+  const [account, setAccount] = useState();
+  const [formComplete, setFormComplete] = useState(true);
+  const [btn, setBtn] = useState("Request");
+  const [err, setErr] = useState();
+  const [success, setSuccess] = useState();
+  const [showMessage, setShowMessage] = useState(false);
 
   function handleModal() {
     setShowMessage(false);
     console.log("reached");
   }
+
+  const [acc, setAcc] = useState();
+  useEffect(() => {
+    const accounts = JSON.parse(localStorage.getItem("accounts"));
+    setAcc(accounts);
+  }, []);
 
   async function handleSend(e) {
     e.preventDefault();
@@ -70,16 +76,16 @@ export default function Settings() {
           setTimeline("");
           setAccount("");
         });
-      } catch (err) {
-        setBtn("Request");
-        setErr("An error occured");
-        setShowMessage(true);
-        setName("");
-        setNarration("");
-        setTimeline("");
-        setAccount("");
-      }
-    } 
+    } catch (err) {
+      setBtn("Request");
+      setErr("An error occured");
+      setShowMessage(true);
+      setName("");
+      setNarration("");
+      setTimeline("");
+      setAccount("");
+    }
+  }
 
   return (
     <>
@@ -118,25 +124,39 @@ export default function Settings() {
 
               <div className="personal__info__item">
                 <h5>Timeline</h5>
-                <input
-                  type="email"
-                  className="send__input"
-                  name="send__input"
-                  // make this a dropdown
-                />
+                <select
+                  className="statement__account-options"
+                  id="account-options"
+                >
+                  <option value="" default disabled>
+                    Select Timeline
+                  </option>
+                  <option value="Last 6 months">Last 6 months</option>
+                  <option value="Last 12 months">Last 12 months</option>
+                </select>
               </div>
 
               <div className="personal__info__item">
                 <h5>Select Account</h5>
-                <input 
-                  type="date" 
-                  className="send__input" 
-                  name="send__input" 
-                  // make this a dropdown with the accounts GET request
-                />
+
+                <select
+                  className="statement__account-options"
+                  id="account-options"
+                >
+                  <option value="" default disabled>
+                    Select Account
+                  </option>
+                  {acc
+                    ? acc.map((unit, index) => (
+                        <option value={acc[index].account_name}>
+                          {acc[index].account_name}
+                        </option>
+                      ))
+                    : null}
+                </select>
               </div>
 
-              <div className="personal__info__item">
+              {/* <div className="personal__info__item">
                 <h5>End Date</h5>
                 <input 
                   type="date" 
@@ -144,7 +164,7 @@ export default function Settings() {
                   name="send__input" 
                   // you can delete this
                 />
-              </div>
+              </div> */}
 
               <div className="personal__info__item">
                 <h5>Narration/reason</h5>

@@ -31,7 +31,7 @@
    font-size:1rem;
 }
 
-.personal__info__item input,  .personal__info__item textarea{
+.personal__info__item input,  .personal__info__item textarea, .personal__info__item select {
     border:1px solid #e6e6e6;
     border-radius:10px;
     padding:.4rem 2rem;

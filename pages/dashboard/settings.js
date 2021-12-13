@@ -1,5 +1,5 @@
 import Link from "next/link";
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Sidebar from "../../components/sidebar";
 import Chart from "../../components/chart";
@@ -7,22 +7,19 @@ import Notify from "../../images/icons/notify.svg";
 import Avatar from "../../images/icons/avatar.svg";
 
 export default function Settings() {
-
-  const [email , setEmail] = useState("ugwuchiagoziestanley@gmail.com");
-  const [user , setUser] = useState("");
+  const [email, setEmail] = useState("ugwuchiagoziestanley@gmail.com");
+  const [user, setUser] = useState("");
   const [name, setName] = useState("ugwustanley");
-  
+
   useEffect(() => {
-   
-    const user = JSON.parse(localStorage.getItem('user'));
-    if(user){
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user) {
       setUser(user);
       setName(user.username);
-      setEmail(user.email)
-      console.log(user)
+      setEmail(user.email);
+      console.log(user);
     }
-   
-  },[])
+  }, []);
   return (
     <>
       <div className="settings dash">
@@ -84,7 +81,9 @@ export default function Settings() {
               </div>
 
               <div className="personal__info__item personal__info__item-btn">
-                <button>Change Password</button>
+                <Link href="/dashboard/soon">
+                  <button>Change Password</button>
+                </Link>
               </div>
             </div>
           </div>

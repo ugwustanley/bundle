@@ -85,6 +85,14 @@
   margin-right: auto;
   text-align: left;
 }
+.sent-request-table .transaction-table__item {
+  grid-template-columns: 1fr 1fr 2fr 1fr 1fr;
+}
+.sent-request-table .view {
+  color: var(--blue);
+  text-decoration: underline;
+  cursor: pointer;
+}
 .transaction-table__item p {
   margin-right: 1rem !important;
 }
@@ -120,10 +128,14 @@
   outline: none;
   border-radius: 8px;
   border: 2px solid var(--blue);
-  background:var(--blue);
-  color:#fff;
+  background: var(--blue);
+  color: #fff;
   cursor: pointer;
 }
+.transaction-table__item:nth-child(even) {
+  background-color: rgba(208, 213, 241, 0.15);
+}
+
 @media (max-width: 1000px) {
   .dash {
     display: none;
