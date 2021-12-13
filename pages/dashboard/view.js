@@ -32,12 +32,16 @@ export default function Statement() {
   }, []);
 
   const downloadPdfDocument = (rootElementId) => {
+      console.log('sodn')
     const input = document.getElementById(rootElementId);
     html2canvas(input).then((canvas) => {
       const imgData = canvas.toDataURL("image/png");
       const pdf = new jsPDF();
       pdf.addImage(imgData, "JPEG", 0, 0);
       pdf.autoPrint();
+      window.print()
+    //  pdf.output('datauristring');
+     
     });
   };
 
@@ -111,7 +115,7 @@ export default function Statement() {
         </p>
       </div>
       {showMessage ? (
-        <ViewModal handleModal={handleViewModal}  />
+        <ViewModal handleModal={handleViewModal} downloadPdfDocument={downloadPdfDocument}  />
       ) : null}
     </>
   );

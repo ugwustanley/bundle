@@ -10,29 +10,33 @@ import axios from "axios";
 export default function Settings() {
   const [name, setName] = useState();
   const [narration, setNarration] = useState();
-  const [timeline, setTimeline] = useState();
+  const [timeline2, setTimeline2] = useState("Last 6 months");
   const [account, setAccount] = useState();
   const [formComplete, setFormComplete] = useState(true);
   const [btn, setBtn] = useState("Request");
   const [err, setErr] = useState();
+  const [mono, setMono] = useState();
   const [success, setSuccess] = useState();
+  const [timeline, setTimeline] = useState("Last 6 months");
   const [showMessage, setShowMessage] = useState(false);
+  const [acc, setAcc] = useState();
+  const [id, setId] = useState(acc ? acc[0].mono_id : null);
 
   function handleModal() {
     setShowMessage(false);
     console.log("reached");
   }
 
-  const [acc, setAcc] = useState();
   useEffect(() => {
     const accounts = JSON.parse(localStorage.getItem("accounts"));
     setAcc(accounts);
+    setId(accounts[0].mono_id);
   }, []);
 
   async function handleSend(e) {
     e.preventDefault();
-
-    if (!name || !narration || !timeline || !account) {
+    console.log(name, narration, timeline2, id, mono);
+    if (!name || !narration || !timeline2 || !mono) {
       setFormComplete(false);
       return;
     }
@@ -42,8 +46,8 @@ export default function Settings() {
     const load = {
       receiver: name,
       reason: narration,
-      timeline: timeline,
-      mono_id: account,
+      timeline: timeline2,
+      mono_id: mono,
     };
 
     console.log(load);
@@ -64,7 +68,7 @@ export default function Settings() {
           setShowMessage(true);
           setName("");
           setNarration("");
-          setTimeline("");
+          setTimeline2("");
           setAccount("");
         })
         .catch((err) => {
@@ -73,7 +77,7 @@ export default function Settings() {
           setShowMessage(true);
           setName("");
           setNarration("");
-          setTimeline("");
+          setTimeline2("");
           setAccount("");
         });
     } catch (err) {
@@ -82,7 +86,7 @@ export default function Settings() {
       setShowMessage(true);
       setName("");
       setNarration("");
-      setTimeline("");
+      setTimeline2("");
       setAccount("");
     }
   }
@@ -119,14 +123,29 @@ export default function Settings() {
             <div className="personal__info__items">
               <div className="personal__info__item">
                 <h5>Receiver’s bundle username</h5>
-                <input type="text" className="send__input" name="send__input" />
+                <input
+                  type="text"
+                  onChange={(e) => setName(e.target.value)}
+                  value={name}
+                  className={
+                    formComplete
+                      ? "send__input"
+                      : "send__input  auth__input--err"
+                  }
+                  name="send__input"
+                />
               </div>
 
               <div className="personal__info__item">
                 <h5>Timeline</h5>
                 <select
-                  className="statement__account-options"
+                  className={
+                    formComplete
+                      ? "send__input statement__account-options"
+                      : "send__input statement__account-options auth__input--err"
+                  }
                   id="account-options"
+                  onChange={(e) => setTimeline2(e.target.value)}
                 >
                   <option value="" default disabled>
                     Select Timeline
@@ -140,15 +159,20 @@ export default function Settings() {
                 <h5>Select Account</h5>
 
                 <select
-                  className="statement__account-options"
                   id="account-options"
+                  className={
+                    formComplete
+                      ? "send__input statement__account-options"
+                      : "send__input statement__account-options auth__input--err"
+                  }
+                  onChange={(e) => setMono(e.target.value)}
                 >
-                  <option value="" default disabled>
+                  <option value="">
                     Select Account
                   </option>
                   {acc
                     ? acc.map((unit, index) => (
-                        <option value={acc[index].account_name}>
+                        <option value={acc[index].mono_id}>
                           {acc[index].account_name}
                         </option>
                       ))
@@ -169,7 +193,13 @@ export default function Settings() {
               <div className="personal__info__item">
                 <h5>Narration/reason</h5>
                 <textarea
-                  className="send__input"
+                  onChange={(e) => setNarration(e.target.value)}
+                  value={narration}
+                  className={
+                    formComplete
+                      ? "send__input"
+                      : "send__input auth__input--err"
+                  }
                   rows={10}
                   cols={10}
                   name="send__input"
@@ -177,7 +207,7 @@ export default function Settings() {
               </div>
 
               <div className="personal__info__item personal__info__item-btn personal__info__item-send">
-                <button>Send</button>
+                <button onClick={(e) => handleSend(e)}>Send</button>
               </div>
             </div>
           </div>

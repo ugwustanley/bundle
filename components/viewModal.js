@@ -4,7 +4,7 @@ import Success from "../images/success.svg";
 import Failure from "../images/failure.svg";
 import moment from "moment";
 
-export default function ViewModal({ handleModal }) {
+export default function ViewModal({ handleModal , downloadPdfDocument }) {
   const [trans, setTrans] = useState();
 
   const [acc, setAcc] = useState();
@@ -53,7 +53,8 @@ export default function ViewModal({ handleModal }) {
             >
               Close
             </button>
-            <button className="send-request-view__button send-request-view__button--print">
+            <button
+            onClick={() => downloadPdfDocument("trans__table")} className="send-request-view__button send-request-view__button--print">
               Print
             </button>
           </div>
