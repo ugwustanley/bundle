@@ -10,15 +10,16 @@ export default function Settings() {
 
   const [email , setEmail] = useState("ugwuchiagoziestanley@gmail.com");
   const [user , setUser] = useState("");
-  const [name , name] = useState("ugwustanley");
+  const [name, setName] = useState("ugwustanley");
   
   useEffect(() => {
    
-    const user = localStorage.getItem('user');
+    const user = JSON.parse(localStorage.getItem('user'));
     if(user){
-      setUser(JSON.parse(user));
-      setName(JSON.parse(user).userName);
-      setEmail(JSON.parse(user).email)
+      setUser(user);
+      setName(user.username);
+      setEmail(user.email)
+      console.log(user)
     }
    
   },[])
@@ -57,14 +58,14 @@ export default function Settings() {
               <div className="personal__info__item">
                 <h5>Full Name</h5>
                 <div>
-                  <p>{username}</p>
+                  <p>{name}</p>
                 </div>
               </div>
 
               <div className="personal__info__item">
                 <h5>Username</h5>
                 <div>
-                  <p>{username}</p>
+                  <p>{name}</p>
                 </div>
               </div>
 
