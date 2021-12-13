@@ -4,21 +4,18 @@ import Link from "next/link";
 import AuthImage from "../images/auth.svg";
 import Logo2 from "../images/logo-2.svg";
 import Google from "../images/icons/Google Icon.svg";
-import Preloader from "../components/preloader";
+import Preloader2 from "../components/preloader2";
 import { AnimatePresence } from "framer-motion";
 import axios from "axios";
-// import UseFetch from "../help/fetch";
 
 export default function Signup() {
   const [response, setResponse] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [hasError, setHasError] = useState(false);
   const [showPreloader, setShowPreloader] = useState(true);
   const [formComplete, setFormComplete] = useState(true);
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [password2, setPassword2] = useState();
-  const [fullName, setFullName] = useState();
   const [username, setUsername] = useState();
   const [btn, setBtn] = useState("Sign Up");
   const [err, setErr] = useState();
@@ -26,9 +23,13 @@ export default function Signup() {
   async function handleRegister(e) {
     e.preventDefault();
 
-    if (!email || !password || !fullName || !username || !password2) {
+    if (!email || !password || !username || !password2) {
       setErr("Incomplete Input");
       setFormComplete(false);
+      return;
+    }
+    if (password !== password2) {
+      setErr("The two password do not match");
       return;
     }
 
@@ -44,46 +45,43 @@ export default function Signup() {
       password1: password,
       password2: password2,
     };
-    const headers = {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-    };
+
     console.log(load);
     try {
       axios({
-        method: "POST",
-        headers: headers,
-        url: `https://bundle-backend.herokuapp.com/auth/registration`,
+        method: "post",
+        url: "https://bundle-backend.herokuapp.com/auth/registration/",
         data: JSON.stringify(load),
+        headers: { "Content-Type": "application/json" },
       })
-        // .post(`https://bundle-backend.herokuapp.com/auth/registration`, {
-        //   params: JSON.stringify(load),
-        //   headers: headers,
-        // })
         .then((res) => {
+          setBtn("Sign Up");
           setResponse(res.data);
           setLoading(false);
           console.log(res.data);
+          window.location.href = "/login";
         })
         .catch(() => {
-          setHasError(true);
+          setBtn("Sign Up");
+          setErr(
+            "An error occurred, check your input and try again. Password must be complex containing letters, numbers and special characters alike"
+          );
           setLoading(false);
         });
     } catch (err) {
       console.log(err);
-      setBtn("SignUp");
-
+      setBtn("Sign Up");
       setErr("An error occurred");
     }
   }
 
   setTimeout(() => {
     setShowPreloader(false);
-  }, 5000);
+  }, 1300);
 
   return (
     <>
-      {/* <AnimatePresence>{showPreloader ? <Preloader /> : null}</AnimatePresence> */}
+      <AnimatePresence>{showPreloader ? <Preloader2 /> : null}</AnimatePresence>
       <div className="auth">
         <div className="auth__image-container">
           <h3>Sign Up</h3>
@@ -103,15 +101,6 @@ export default function Signup() {
 
           <form className="auth__form">
             <p style={{ color: "red" }}>{err}</p>
-            <input
-              onChange={(e) => setFullName(e.target.value)}
-              type="text"
-              placeholder="Full Name"
-              name="name"
-              className={
-                formComplete ? "auth__input" : "auth__input auth__input--err"
-              }
-            />
             <input
               onChange={(e) => setUsername(e.target.value)}
               type="text"

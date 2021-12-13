@@ -1,0 +1,22 @@
+.send__options{
+    display:flex;
+    justify-content:center;
+}
+
+.send__option{
+    text-align:center;
+    margin: 3rem;
+    background:#F8F9FD;
+    padding: 2rem 3rem;
+    padding-top:6rem;
+    border-radius:10px;
+    font-size:1.7rem;
+    font-weight:200;
+    color:var(--black);
+    cursor:pointer;
+}
+
+.send__option h4{
+    font-weight:400;
+    color:var(--black);
+}

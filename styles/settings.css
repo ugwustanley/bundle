@@ -1,6 +1,9 @@
 /* .settings{
     font-family:'Poppins';
 } */
+/* .settings__details h2{
+    
+} */
 .personal__info h3{
     font-size: 1.6em;
     font-weight:500;
@@ -9,11 +12,13 @@
     display:grid;
     grid-template-columns: 1fr 1fr;
     grid-gap:2rem;
+    margin-top:2rem;
 }
 .personal__info__item h5{
     font-size: 1.2em;
     font-weight:500;
     margin-bottom:15px;
+    margin-top:0;
 }
 
 .personal__info__item div {
@@ -26,12 +31,28 @@
    font-size:1rem;
 }
 
+.personal__info__item input,  .personal__info__item textarea{
+    border:1px solid #e6e6e6;
+    border-radius:10px;
+    padding:.4rem 2rem;
+    outline:none;
+    height:70px;
+    width:100%;
+    max-width:350px;
+    font-weight:400;
+    font-size:1rem;
+ }
+.personal__info__item textarea{
+    padding:0 2rem;
+}
 .personal__info__item-btn{
     display:grid;
     align-items:flex-end;
     justify-items:flex-start;
 }
-
+.personal__info__item-send{
+    grid-column:1/2;
+}
 .personal__info__item-btn button{
     background:var(--blue);
     outline:none;

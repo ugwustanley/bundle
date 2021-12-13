@@ -8,9 +8,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@mono.co/connect.js": "^0.2.2",
     "axios": "^0.24.0",
     "chart.js": "^3.6.2",
     "framer-motion": "^5.4.5",
+    "html2canvas": "^1.3.3",
+    "jspdf": "^2.4.0",
+    "moment": "^2.29.1",
     "next": "12.0.7",
     "react": "17.0.2",
     "react-chartjs-2": "^4.0.0",

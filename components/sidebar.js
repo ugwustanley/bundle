@@ -15,32 +15,32 @@ export default function({activeTab}){
 
             <div className="sidebar__links-container">
                 <ul className="sidebar__links">
-                     <Link href="./statement">
+                     <Link href="/dashboard/statement">
                          <li className={activeTab === 'statement' ? `sidebar__link sidebar__link--active`: `sidebar__link`}>
                              <Image src={Statement} width={20} height={20} alt="account statement"/>
                              <p> Account Statement</p>
                          </li>
                      </Link>
 
-                       <Link href="./estimate">
+                       <Link href="/dashboard/estimate">
                          <li className={activeTab === 'estimate' ? `sidebar__link sidebar__link--active`: `sidebar__link`}>
                              <Image src={Estimate} width={20} height={20} alt="account estimate"/>
                              <p>Estimate</p>
                          </li>
                        </Link>
-                       <Link href="./send">
+                       <Link href="/dashboard/send">
                          <li className={activeTab === 'send' ? `sidebar__link sidebar__link--active`: `sidebar__link`}>
                              <Image src={Send} width={20} height={20} alt="send statement"/>
                              <p>Send</p>
                          </li>
                      </Link>
-                     <Link href="./request">
+                     <Link href="/dashboard/request">
                          <li className={activeTab === 'request' ? `sidebar__link sidebar__link--active`: `sidebar__link`}>
                              <Image src={Request} width={20} height={20} alt="request statement"/>
                              <p>Request</p>
                          </li>
                      </Link>  
-                     <Link href="./settings">
+                     <Link href="/dashboard/settings">
                          <li className={activeTab === 'settings' ? `sidebar__link sidebar__link--active`: `sidebar__link`}>
                              <Image src={Settings} width={20} height={20} alt="account settings"/>
                              <p>Settings</p>

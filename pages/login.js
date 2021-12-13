@@ -4,18 +4,79 @@ import Link from "next/link";
 import AuthImage from "../images/auth.svg";
 import Logo2 from "../images/logo-2.svg";
 import Google from "../images/icons/Google Icon.svg";
-import Preloader from "../components/preloader";
+import Preloader2 from "../components/preloader2";
 import { AnimatePresence, motion } from "framer-motion";
+import axios from "axios";
 
 export default function Login() {
   const [showPreloader, setShowPreloader] = useState(true);
+  const [response, setResponse] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [hasError, setHasError] = useState(false);
+  const [formComplete, setFormComplete] = useState(true);
+  const [password, setPassword] = useState();
+  const [username, setUsername] = useState();
+  const [btn, setBtn] = useState("Sign In");
+  const [err, setErr] = useState();
+
+  async function handleLogin(e) {
+    e.preventDefault();
+
+    if (!password || !username) {
+      setErr("Incomplete Input");
+      setFormComplete(false);
+      return;
+    }
+
+    if (password.length < 8) {
+      setErr("Password Length Must Be Up To Eight Characters ");
+      return;
+    }
+    setFormComplete(true);
+    setBtn("Please wait...");
+    const load = {
+      username: username,
+      password: password,
+    };
+
+    console.log(load);
+    try {
+      axios({
+        method: "post",
+        url: "https://bundle-backend.herokuapp.com/auth/login/",
+        data: JSON.stringify(load),
+        headers: { "Content-Type": "application/json" },
+      })
+        .then((res) => {
+          setResponse(res.data);
+          setLoading(false);
+          console.log(res.data);
+          setBtn("Sign In");
+          localStorage.setItem("token", res.data.key);
+          localStorage.setItem("user", JSON.stringify(res.data.user));
+          window.location.href = "/connect";
+        })
+        .catch(() => {
+          setHasError(true);
+          setBtn("Sign In");
+          setErr(
+            "An error occurred while trying to login user. Check your input and try again"
+          );
+        });
+    } catch (err) {
+      console.log(err);
+      setBtn("Sign In");
+
+      setErr("An error occurred");
+    }
+  }
 
   setTimeout(() => {
     setShowPreloader(false);
-  }, 5000);
+  }, 1300);
   return (
     <>
-      <AnimatePresence>{showPreloader ? <Preloader /> : null}</AnimatePresence>
+      <AnimatePresence>{showPreloader ? <Preloader2 /> : null}</AnimatePresence>
       <div className="auth">
         <div className="auth__image-container">
           <h3>Sign In</h3>
@@ -34,23 +95,29 @@ export default function Login() {
           <p>It’s good to have you back!</p>
 
           <form className="auth__form">
+            <p style={{ color: "red" }}>{err}</p>
             <input
-              type="email"
-              placeholder="Email Address"
-              name="email"
+              onChange={(e) => setUsername(e.target.value)}
+              type="text"
+              placeholder="Username"
+              name="username"
               className={
                 formComplete ? "auth__input" : "auth__input auth__input--err"
               }
             />
             <input
+              onChange={(e) => setPassword(e.target.value)}
               type="password"
               placeholder="Enter Password"
               className={
                 formComplete ? "auth__input" : "auth__input auth__input--err"
               }
             />
-            <button className="auth__button auth__button--login">
-              Sign In
+            <button
+              onClick={(e) => handleLogin(e)}
+              className="auth__button auth__button--login"
+            >
+              {btn}
             </button>
           </form>
 
