@@ -110,7 +110,7 @@ export default function Statement() {
 
           <div
             className="transaction-table sent-request-table"
-            id="trans__table"
+           
           >
             {/* heading for table */}
             <div className="transaction-table__item transaction-table__header  sent-request-table__header">
