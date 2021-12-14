@@ -115,15 +115,17 @@ export default function Estimate() {
             <p>
               Estimated balance after<b> {months || 1} </b>Month(s):{" "}
               <b>{trans ? trans[months].balance : "000"}</b>
+              {""} <b>NAIRA</b>
             </p>
             <p>
               Estimated amount of deposits for <b> {months || 1} </b> Month(s)
-              selected period: <b>{averageAm ? averageAm * months : "000"}</b>
+              selected period: <b>{averageAm ? averageAm * months : "000"}</b>{" "}
+              {""} <b>NAIRA</b>
             </p>
             <p>
               Estimated amount of withdrawals for <b> {months || 1} </b>{" "}
               Month(s) selected period:{" "}
-              <b>{averageW ? averageW * months : "000"}</b>
+              <b>{averageW ? averageW * months : "000"}</b> {""} <b>NAIRA</b>
             </p>
           </div>
         </div>

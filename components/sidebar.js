@@ -33,19 +33,6 @@ export default function ({ activeTab }) {
               <p> Account Statement</p>
             </li>
           </Link>
-
-          <Link href="/dashboard/send">
-            <li
-              className={
-                activeTab === "send"
-                  ? `sidebar__link sidebar__link--active`
-                  : `sidebar__link`
-              }
-            >
-              <Image src={Send} width={20} height={20} alt="send statement" />
-              <p>Send</p>
-            </li>
-          </Link>
           <Link href="/dashboard/request">
             <li
               className={
@@ -61,18 +48,6 @@ export default function ({ activeTab }) {
                 alt="request statement"
               />
               <p>Request</p>
-            </li>
-          </Link>
-          <Link href="/dashboard/view">
-            <li
-              className={
-                activeTab === "view"
-                  ? `sidebar__link sidebar__link--active`
-                  : `sidebar__link`
-              }
-            >
-              <Image src={View} width={20} height={20} alt="view statement" />
-              <p>View</p>
             </li>
           </Link>
           <Link href="/dashboard/estimate">
@@ -92,6 +67,31 @@ export default function ({ activeTab }) {
               <p>Estimate</p>
             </li>
           </Link>
+          <Link href="/dashboard/view">
+            <li
+              className={
+                activeTab === "view"
+                  ? `sidebar__link sidebar__link--active`
+                  : `sidebar__link`
+              }
+            >
+              <Image src={View} width={20} height={20} alt="view statement" />
+              <p>View</p>
+            </li>
+          </Link>
+          <Link href="/dashboard/send">
+            <li
+              className={
+                activeTab === "send"
+                  ? `sidebar__link sidebar__link--active`
+                  : `sidebar__link`
+              }
+            >
+              <Image src={Send} width={20} height={20} alt="send statement" />
+              <p>Send</p>
+            </li>
+          </Link>
+
           <Link href="/dashboard/settings">
             <li
               className={
