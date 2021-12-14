@@ -1,23 +1,23 @@
 import Link from "next/link";
 import Image from "next/image";
 import Sidebar from "../../../components/sidebar";
-import Chart from "../../../components/chart";
 import Notify from "../../../images/icons/notify.svg";
+import Modal from "../../../components/modal";
 import Avatar from "../../../images/icons/avatar.svg";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function Settings() {
+export default function Send() {
   const [name, setName] = useState();
   const [narration, setNarration] = useState();
-  const [timeline2, setTimeline2] = useState("Last 6 months");
+  const [timeline2, setTimeline2] = useState("last6months");
   const [account, setAccount] = useState();
   const [formComplete, setFormComplete] = useState(true);
-  const [btn, setBtn] = useState("Request");
+  const [btn, setBtn] = useState("Send");
+  const [statement, setStatement] = useState();
   const [err, setErr] = useState();
   const [mono, setMono] = useState();
   const [success, setSuccess] = useState();
-  const [timeline, setTimeline] = useState("Last 6 months");
   const [showMessage, setShowMessage] = useState(false);
   const [acc, setAcc] = useState();
   const [id, setId] = useState(acc ? acc[0].mono_id : null);
@@ -63,7 +63,8 @@ export default function Settings() {
       })
         .then((res) => {
           console.log(res.data);
-          setBtn("Request");
+          setStatement(res.data);
+          setBtn("Send");
           setSuccess(true);
           setShowMessage(true);
           setName("");
@@ -72,7 +73,7 @@ export default function Settings() {
           setAccount("");
         })
         .catch((err) => {
-          setBtn("Request");
+          setBtn("Send");
           setErr("An error occured while trying to send statement");
           setShowMessage(true);
           setName("");
@@ -81,7 +82,7 @@ export default function Settings() {
           setAccount("");
         });
     } catch (err) {
-      setBtn("Request");
+      setBtn("Send");
       setErr("An error occured");
       setShowMessage(true);
       setName("");
@@ -207,7 +208,7 @@ export default function Settings() {
               </div>
 
               <div className="personal__info__item personal__info__item-btn personal__info__item-send">
-                <button onClick={(e) => handleSend(e)}>Send</button>
+                <button onClick={(e) => handleSend(e)}>{btn}</button>
               </div>
             </div>
           </div>
@@ -219,6 +220,9 @@ export default function Settings() {
           desktop device and try again
         </p>
       </div>
+      {showMessage && !statement.statement.message ? (
+        <Modal handleModal={handleModal} successful={success} />
+      ) : null}
     </>
   );
 }

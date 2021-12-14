@@ -4,7 +4,12 @@ import Success from "../images/success.svg";
 import Failure from "../images/failure.svg";
 import moment from "moment";
 
-export default function ViewModal({ handleModal , downloadPdfDocument }) {
+export default function ViewModal({
+  handleModal,
+  downloadPdfDocument,
+  statement,
+  sender,
+}) {
   const [trans, setTrans] = useState();
 
   const [acc, setAcc] = useState();
@@ -24,7 +29,7 @@ export default function ViewModal({ handleModal , downloadPdfDocument }) {
             className="transaction-table sent-request-view"
             id="trans__table"
           >
-            <h3>Ugwu Stanley</h3>
+            <h3>{sender ? sender : "Ugwu Stanley"}</h3>
             {/* heading for table */}
             <div className="transaction-table__item transaction-table__header  sent-request-view__header">
               <p>Date</p>
@@ -33,17 +38,23 @@ export default function ViewModal({ handleModal , downloadPdfDocument }) {
               <p>Deposit</p>
               <p>Balance</p>
             </div>
-            {trans
-              ? trans.map((unit, index) => (
+            {statement
+              ? statement.map((unit, index) => (
                   <div className="transaction-table__item">
-                    <p>{moment(trans[index].date).format("MM/DD/YYYY")}</p>
-                    <p className="narration">{trans[index].narration}</p>
-                    <p>{trans[index].amount}</p>
-                    <p>{trans[index].type}</p>
-                    <p>{trans[index].balance}</p>
+                    {console.log(typeof statement)}
+
+                    <p>
+                      {moment(statement[index].date).format("MM/DD/YYYY") ||
+                        "null"}
+                    </p>
+                    <p className="narration">{statement[index].narration}</p>
+                    <p>{statement[index].amount}</p>
+                    <p>{statement[index].type}</p>
+                    <p>{statement[index].balance}</p>
                   </div>
                 ))
               : null}
+            {statement ? console.log(statement) : null}
           </div>
 
           <div className="send-request-view__buttons">
@@ -54,8 +65,10 @@ export default function ViewModal({ handleModal , downloadPdfDocument }) {
               Close
             </button>
             <button
-            onClick={() => downloadPdfDocument("trans__table")} className="send-request-view__button send-request-view__button--print">
-              Print
+              onClick={() => downloadPdfDocument("trans__table")}
+              className="send-request-view__button send-request-view__button--print"
+            >
+              Download
             </button>
           </div>
         </div>

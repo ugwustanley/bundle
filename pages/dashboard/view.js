@@ -7,6 +7,7 @@ import Chart from "../../components/chart";
 import Notify from "../../images/icons/notify.svg";
 import Avatar from "../../images/icons/avatar.svg";
 import ViewModal from "../../components/viewModal";
+import axios from "axios";
 import moment from "moment";
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
@@ -23,6 +24,10 @@ export default function Statement() {
 
   const [showMessage, setShowMessage] = useState(false);
 
+  const [statement, setStatement] = useState();
+
+  const [index, setIndex] = useState(0);
+
   useEffect(() => {
     const transactions = JSON.parse(localStorage.getItem("transactions"));
     const accounts = JSON.parse(localStorage.getItem("accounts"));
@@ -31,17 +36,44 @@ export default function Statement() {
     setAcc(accounts);
   }, []);
 
+  async function getView() {
+    console.log("called getView");
+    const key = localStorage.getItem("token");
+    const auth = `token${" "}${key}`;
+    try {
+      axios({
+        method: "get",
+        url: "https://bundle-backend.herokuapp.com/connect/sendstatement/",
+        headers: { "Content-Type": "application/json", Authorization: auth },
+      })
+        .then((res) => {
+          console.log(res.data);
+          setStatement(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  useEffect(() => {
+    getView();
+  }, []);
+
   const downloadPdfDocument = (rootElementId) => {
-      console.log('sodn')
+    console.log("sodn");
     const input = document.getElementById(rootElementId);
     html2canvas(input).then((canvas) => {
       const imgData = canvas.toDataURL("image/png");
       const pdf = new jsPDF();
       pdf.addImage(imgData, "JPEG", 0, 0);
-      pdf.autoPrint();
-      window.print()
-    //  pdf.output('datauristring');
-     
+      pdf.save(
+        statement[index].sender
+          ? `${statement[index].sender}'s Transactions`
+          : "transactions"
+      );
     });
   };
 
@@ -82,20 +114,26 @@ export default function Statement() {
           >
             {/* heading for table */}
             <div className="transaction-table__item transaction-table__header  sent-request-table__header">
-              <p>Date Sent</p>
-              <p>Date Received</p>
-              <p>Name of reciever</p>
-              <p>Status</p>
+              <p>Receiver</p>
+              <p>Sender</p>
+              <p>Narration</p>
+              <p>Timeline</p>
               <p></p>
             </div>
-            {trans
-              ? trans.map((unit, index) => (
+            {statement
+              ? statement.map((unit, index) => (
                   <div className="transaction-table__item">
-                    <p>{moment(trans[index].date).format("MM/DD/YYYY")}</p>
-                    <p className="narration">{trans[index].balance}</p>
-                    <p>{trans[index].amount}</p>
-                    <p>{trans[index].type}</p>
-                    <p onClick={() => setShowMessage(true)} className="view">
+                    <p>{unit.receiver}</p>
+                    <p>{unit.sender}</p>
+                    <p className="narration">{unit.reason}</p>
+                    <p>{unit.timeline}</p>
+
+                    <p
+                      onClick={() => {
+                        setShowMessage(true), setIndex(index);
+                      }}
+                      className="view"
+                    >
                       view
                     </p>
                   </div>
@@ -115,7 +153,16 @@ export default function Statement() {
         </p>
       </div>
       {showMessage ? (
-        <ViewModal handleModal={handleViewModal} downloadPdfDocument={downloadPdfDocument}  />
+        <ViewModal
+          handleModal={handleViewModal}
+          downloadPdfDocument={downloadPdfDocument}
+          statement={
+            statement[index].statement.message
+              ? null
+              : statement[index].statement.data
+          }
+          sender={statement[index].sender}
+        />
       ) : null}
     </>
   );
