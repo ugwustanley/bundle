@@ -69,8 +69,6 @@ export default function Send() {
           setShowMessage(true);
           setName("");
           setNarration("");
-          setTimeline2("");
-          setAccount("");
         })
         .catch((err) => {
           setBtn("Send");
@@ -78,8 +76,6 @@ export default function Send() {
           setShowMessage(true);
           setName("");
           setNarration("");
-          setTimeline2("");
-          setAccount("");
         });
     } catch (err) {
       setBtn("Send");
@@ -151,8 +147,8 @@ export default function Send() {
                   <option value="" default disabled>
                     Select Timeline
                   </option>
-                  <option value="Last 6 months">Last 6 months</option>
-                  <option value="Last 12 months">Last 12 months</option>
+                  <option value="last6months">Last 6 months</option>
+                  <option value="last12months">Last 12 months</option>
                 </select>
               </div>
 
