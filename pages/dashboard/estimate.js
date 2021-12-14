@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
@@ -9,11 +9,41 @@ import Avatar from "../../images/icons/avatar.svg";
 
 export default function Estimate() {
   const router = useRouter();
-  // useEffect(() => {
-  //   if (!(JSON.parse(localStorage.getItem("token")))) {
-  //     router.replace("/");
-  //   }
-  // }, []);
+  const [months, setMonths] = useState(1);
+  const [trans, setTrans] = useState();
+  const [averageAm, setAverageAm] = useState();
+  const [averageW, setAverageW] = useState();
+  const [acc, setAcc] = useState();
+  useEffect(() => {
+    const transactions = JSON.parse(localStorage.getItem("transactions"));
+    const accounts = JSON.parse(localStorage.getItem("accounts"));
+    // console.log(transactions, accounts);
+
+    setAverageAm(
+      transactions.reduce((total, amount, index, array) => {
+        total += amount.balance;
+        if (index === array.length - 1) {
+          return total / array.length;
+        } else {
+          return total;
+        }
+      }, 0)
+    );
+
+    setAverageW(
+      transactions.reduce((total, amount, index, array) => {
+        total += amount.amount;
+        if (index === array.length - 1) {
+          return total / array.length;
+        } else {
+          return total;
+        }
+      }, 0)
+    );
+
+    setTrans(transactions);
+    setAcc(accounts);
+  }, []);
   return (
     <>
       <div className="statement dash">
@@ -53,9 +83,13 @@ export default function Estimate() {
                 <option value="" default disabled>
                   Select Account
                 </option>
-                <option value="00000000">00000000</option>
-                <option value="00000000">00000000</option>
-                <option value="00000000">00000000</option>
+                {acc
+                  ? acc.map((unit, index) => (
+                      <option value={acc[index].mono_id}>
+                        {acc[index].account_name}
+                      </option>
+                    ))
+                  : null}
               </select>
             </div>
             <div className="accounts__box">
@@ -64,6 +98,7 @@ export default function Estimate() {
               <select
                 className="statement__account-options"
                 id="account-options"
+                onChange={(e) => setMonths(e.target.value)}
               >
                 <option value="" default disabled>
                   Select Months
@@ -77,9 +112,19 @@ export default function Estimate() {
           </div>
           <Chart />
           <div className="final__estimate">
-            <p>Estimated balance after *** Month(s):</p>
-            <p>Estimated amount of deposits for selected period:</p>
-            <p>Estimated amount of withdrawals for selected period:</p>
+            <p>
+              Estimated balance after<b> {months || 1} </b>Month(s):{" "}
+              <b>{trans ? trans[months].balance : "000"}</b>
+            </p>
+            <p>
+              Estimated amount of deposits for <b> {months || 1} </b> Month(s)
+              selected period: <b>{averageAm ? averageAm * months : "000"}</b>
+            </p>
+            <p>
+              Estimated amount of withdrawals for <b> {months || 1} </b>{" "}
+              Month(s) selected period:{" "}
+              <b>{averageW ? averageW * months : "000"}</b>
+            </p>
           </div>
         </div>
       </div>
